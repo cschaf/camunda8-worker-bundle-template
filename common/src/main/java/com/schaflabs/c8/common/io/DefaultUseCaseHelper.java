@@ -4,11 +4,10 @@ import com.schaflabs.c8.common.domain.UseCase;
 import com.schaflabs.c8.common.domain.UseCaseException;
 import com.schaflabs.c8.common.domain.UseCaseResponse;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
-
 import java.util.Date;
 import java.util.function.Function;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 
 /**
  * Die default Implementation von {@link UseCaseHelper}

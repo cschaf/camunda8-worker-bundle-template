@@ -1,12 +1,11 @@
 package com.schaflabs.c8.common.io;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-
-import java.util.Date;
 
 /**
  * Diese Klasse ist die einzig gültige REST Response.

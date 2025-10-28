@@ -1,0 +1,41 @@
+debug:
+  mode: true
+
+server:
+  port: 0
+
+logging:
+  level:
+    io:
+      camunda: INFO
+      camunda.zeebe: INFO
+
+camunda:
+  client:
+    mode: self-managed
+    tenant-ids:
+      - <default>
+    auth:
+      client-id: zeebe
+      client-secret: zecret
+      issuer: "http://<YOUR-IP>:18080/auth/realms/camunda-platform/protocol/openid-connect/token"
+    zeebe:
+      enabled: true
+      defaults:
+        enabled: true
+        stream-enabled: false
+      grpc-address: "http://<YOUR-IP>:26500"
+      rest-address: "http://<YOUR-IP>:8080"
+      prefer-rest-over-grpc: false
+      audience: zeebe-api
+
+workers:
+  common:
+    scheme: "https"
+    host: "api.restful-api.dev"
+  object:
+    getAllObjectRoute: "/objects"
+    getObjectByIdRoute: "/objects/{id}"
+    createObjectRoute: "/objects"
+    updateObjectRoute: "/objects/{id}"
+    deleteObjectRoute: "/objects/{id}"

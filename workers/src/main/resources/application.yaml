@@ -1,0 +1,21 @@
+zeebe:
+  client:
+    cloud:
+      clientId: zeebe
+      clientSecret: zecret
+      authUrl: http://localhost:18080/auth/realms/camunda-platform/protocol/openid-connect/token
+    broker:
+      grpcAddress: http://localhost:26500
+    security:
+      plaintext: true
+
+workers:
+  common:
+    scheme: "https"
+    host: "api.restful-api.dev"
+  object:
+    getAllObjectRoute: "/objects"
+    getObjectByIdRoute: "/objects/{id}"
+    createObjectRoute: "/objects"
+    updateObjectRoute: "/objects/{id}"
+    deleteObjectRoute: "/objects/{id}"

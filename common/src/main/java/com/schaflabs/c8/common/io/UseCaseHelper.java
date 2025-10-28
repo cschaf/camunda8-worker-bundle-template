@@ -4,9 +4,8 @@ import com.schaflabs.c8.common.domain.UseCase;
 import com.schaflabs.c8.common.domain.UseCaseException;
 import com.schaflabs.c8.common.domain.UseCaseResponse;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.http.ResponseEntity;
-
 import java.util.function.Function;
+import org.springframework.http.ResponseEntity;
 
 public interface UseCaseHelper {
   /**

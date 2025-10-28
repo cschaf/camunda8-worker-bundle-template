@@ -1,0 +1,20 @@
+# SaaS 8.7.x
+camunda:
+  client:
+    mode: saas
+    auth:
+      client-id:
+      client-secret:
+    cluster-id:
+    region:
+
+workers:
+  common:
+    scheme: "https"
+    host: "api.restful-api.dev"
+  object:
+    getAllObjectRoute: "/objects"
+    getObjectByIdRoute: "/objects/{id}"
+    createObjectRoute: "/objects"
+    updateObjectRoute: "/objects/{id}"
+    deleteObjectRoute: "/objects/{id}"

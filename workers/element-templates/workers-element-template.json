@@ -1,0 +1,413 @@
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "restful-api-dev-template",
+  "id": "d69c2cde-c652-4440-9e08-13cd0b705300",
+  "version": 1761663907005,
+  "description": "Connector für die REST API von restful-api.dev",
+  "documentationRef": "https://restful-api.dev/",
+  "icon": {
+    "contents": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'%3E%3C/path%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'%3E%3C/polyline%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'%3E%3C/line%3E%3C/svg%3E"
+  },
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": {
+    "value": "bpmn:ServiceTask"
+  },
+  "groups": [
+    {
+      "id": "operation",
+      "label": "Operation"
+    },
+    {
+      "id": "authentication",
+      "label": "Authentifizierung"
+    },
+    {
+      "id": "input",
+      "label": "Input"
+    },
+    {
+      "id": "output",
+      "label": "Output"
+    }
+  ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "jobworkertype_create_example_object",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "create"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "jobworkertype_get_example_object",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "get"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "jobworkertype_getall_example_objects",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "getAll"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "jobworkertype_update_example_object",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "update"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "jobworkertype_delete_example_object",
+      "binding": {
+        "property": "type",
+        "type": "zeebe:taskDefinition"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "delete"
+      }
+    },
+    {
+      "id": "operation",
+      "label": "Operation",
+      "description": "Wählen Sie die gewünschte Operation",
+      "type": "Dropdown",
+      "group": "operation",
+      "choices": [
+        {
+          "name": "Create Object",
+          "value": "create"
+        },
+        {
+          "name": "Get Object",
+          "value": "get"
+        },
+        {
+          "name": "Get All Objects",
+          "value": "getAll"
+        },
+        {
+          "name": "Update Object",
+          "value": "update"
+        },
+        {
+          "name": "Delete Object",
+          "value": "delete"
+        }
+      ],
+      "binding": {
+        "type": "zeebe:input",
+        "name": "operation"
+      }
+    },
+    {
+      "id": "method",
+      "type": "Hidden",
+      "value": "post",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "method"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "create"
+      }
+    },
+    {
+      "id": "method",
+      "type": "Hidden",
+      "value": "get",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "method"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "get"
+      }
+    },
+    {
+      "id": "method",
+      "type": "Hidden",
+      "value": "get",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "method"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "getAll"
+      }
+    },
+    {
+      "id": "method",
+      "type": "Hidden",
+      "value": "put",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "method"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "update"
+      }
+    },
+    {
+      "id": "method",
+      "type": "Hidden",
+      "value": "delete",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "method"
+      },
+      "condition": {
+        "property": "operation",
+        "equals": "delete"
+      }
+    },
+    {
+      "id": "url",
+      "type": "Hidden",
+      "value": "https://api.restful-api.dev/objects",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "url"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "getAll"
+        ]
+      }
+    },
+    {
+      "id": "objectId",
+      "label": "Object ID",
+      "description": "Die ID des Objekts",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "objectId"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "get",
+          "update",
+          "delete"
+        ]
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "id": "url",
+      "type": "Hidden",
+      "value": "=\"https://api.restful-api.dev/objects/\" + objectId",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "url"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "get",
+          "update",
+          "delete"
+        ]
+      }
+    },
+    {
+      "id": "objectName",
+      "label": "Object Name",
+      "description": "Name des Objekts",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "objectName"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      },
+      "constraints": {
+        "notEmpty": true
+      }
+    },
+    {
+      "id": "year",
+      "label": "Year",
+      "description": "Jahr (z.B. 2023)",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "year"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "price",
+      "label": "Price",
+      "description": "Preis (z.B. 1849.99)",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "price"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "cpuModel",
+      "label": "CPU Model",
+      "description": "CPU Modell (z.B. Intel Core i9)",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "cpuModel"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "hardDiskSize",
+      "label": "Hard Disk Size",
+      "description": "Festplattengröße (z.B. 1 TB)",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "hardDiskSize"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "color",
+      "label": "Color",
+      "description": "Farbe (z.B. silver)",
+      "type": "String",
+      "feel": "optional",
+      "group": "input",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:input",
+        "name": "color"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "body",
+      "type": "Hidden",
+      "value": "={\"name\": objectName, \"data\": {\"year\": if year != null then number(year) else null, \"price\": if price != null then number(price) else null, \"CPU model\": cpuModel, \"Hard disk size\": hardDiskSize, \"color\": color}}",
+      "binding": {
+        "type": "zeebe:input",
+        "name": "body"
+      },
+      "condition": {
+        "property": "operation",
+        "oneOf": [
+          "create",
+          "update"
+        ]
+      }
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result Variable",
+      "description": "Name der Prozessvariable, in der das Ergebnis gespeichert wird",
+      "type": "String",
+      "group": "output",
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "resultVariable"
+      }
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result Expression",
+      "description": "FEEL-Expression zur Transformation des Ergebnisses",
+      "type": "Text",
+      "feel": "required",
+      "group": "output",
+      "optional": true,
+      "binding": {
+        "type": "zeebe:taskHeader",
+        "key": "resultExpression"
+      }
+    }
+  ]
+}
