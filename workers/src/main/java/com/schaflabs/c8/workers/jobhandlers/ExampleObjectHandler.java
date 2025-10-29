@@ -3,7 +3,8 @@ package com.schaflabs.c8.workers.jobhandlers;
 import com.schaflabs.c8.common.domain.UseCaseResponse;
 import com.schaflabs.c8.common.utils.JobWorkerUtils;
 import com.schaflabs.c8.workers.JobWorkerTypes;
-import com.schaflabs.c8.workers.definitions.CreateExampleRequestDto;
+import com.schaflabs.c8.workers.definitions.CreateExampleObjectProcessVariables;
+import com.schaflabs.c8.workers.io.dtos.CreateExampleRequestDto;
 import com.schaflabs.c8.workers.usecases.CreateExampleObjectUseCase;
 import io.camunda.zeebe.client.api.response.ActivatedJob;
 import io.camunda.zeebe.client.api.worker.JobClient;
@@ -26,10 +27,23 @@ public class ExampleObjectHandler {
       autoComplete = false)
   public void createExampleObject(JobClient client, final ActivatedJob job) {
     log.info("Handling create example object for process instance {}", job.getProcessInstanceKey());
-    CreateExampleRequestDto usecaseRequest = job.getVariablesAsType(CreateExampleRequestDto.class);
+      CreateExampleObjectProcessVariables processVariables =
+        job.getVariablesAsType(CreateExampleObjectProcessVariables.class);
 
-    UseCaseResponse<CreateExampleObjectUseCase.Response> useCaseResponse =
-        createExampleObjectUseCase.execute(usecaseRequest);
+      // Map process variables to  CreateExampleObjectUseCase.Request
+      CreateExampleObjectUseCase.ObjectDataDto objectDataDto = CreateExampleObjectUseCase.ObjectDataDto.builder()
+              .price(processVariables.getPrice())
+              .color(processVariables.getColor())
+              .year(processVariables.getYear())
+              .hardDiskSize(processVariables.getHardDiskSize())
+              .cpuModel(processVariables.getCpuModel())
+              .build();
+      CreateExampleObjectUseCase.Request useCaseRequest = CreateExampleObjectUseCase.Request.builder().build();
+      useCaseRequest.setName(processVariables.getName());
+      useCaseRequest.setData(objectDataDto);
+
+      UseCaseResponse<CreateExampleObjectUseCase.Response> useCaseResponse =
+        createExampleObjectUseCase.execute(useCaseRequest);
 
     if (useCaseResponse.isSuccessful) {
       log.info("A example object was successfully created: {}", useCaseResponse.getData().getId());

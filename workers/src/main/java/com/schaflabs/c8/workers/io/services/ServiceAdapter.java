@@ -1,12 +1,13 @@
-package com.schaflabs.c8.workers.io;
+package com.schaflabs.c8.workers.io.services;
 
 import com.schaflabs.c8.common.domain.ServiceAdapterResponse;
-import com.schaflabs.c8.workers.definitions.CreateExampleRequestDto;
+import com.schaflabs.c8.workers.io.dtos.CreateExampleRequestDto;
+import com.schaflabs.c8.workers.io.dtos.CreateExampleResponseDto;
 import java.util.List;
 
 public interface ServiceAdapter {
-  <T> ServiceAdapterResponse<T> createExampleObject(
-      CreateExampleRequestDto request, Class<T> clazz);
+  ServiceAdapterResponse<CreateExampleResponseDto> createExampleObject(
+      CreateExampleRequestDto request);
 
   <T> ServiceAdapterResponse<T> getExampleObjectById(long id, Class<T> clazz);
 
