@@ -8,14 +8,17 @@ import com.schaflabs.c8.common.domain.UseCaseResponse;
 import com.schaflabs.c8.workers.definitions.CreateExampleRequestDto;
 import com.schaflabs.c8.workers.definitions.ExceptionType;
 import com.schaflabs.c8.workers.io.ServiceAdapter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Log4j2
+@Component
+@RequiredArgsConstructor
 public class CreateExampleObjectUseCaseImpl implements CreateExampleObjectUseCase {
   private static final String INVALID_INPUT_DATA_FOUND =
       "Failed to create example object! Check given input data!";
-  @Autowired private ServiceAdapter serviceAdapter;
+  private final ServiceAdapter serviceAdapter;
 
   @Override
   public UseCaseResponse<Response> onExecute(CreateExampleRequestDto request)
