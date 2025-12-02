@@ -3,7 +3,6 @@ package com.schaflabs.c8.workers.definitions;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.schaflabs.c8.workers.io.dtos.ExampleObjectDataDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,22 +15,22 @@ import lombok.NoArgsConstructor;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateExampleObjectProcessVariables {
-    @JsonProperty("name")
-    private String name;
+  @JsonProperty("name")
+  private String name;
 
-    @JsonProperty("year")
-    private String year;
+  @JsonProperty("year")
+  private String year;
 
-    @JsonProperty("price")
-    private String price;
+  @JsonProperty("price")
+  private String price;
 
-    @JsonProperty("CPU model")
-    private String cpuModel;
+  @JsonProperty("CPU model")
+  private String cpuModel;
 
-    @JsonProperty("Hard disk size")
-    private String hardDiskSize;
+  @JsonProperty("Hard disk size")
+  private String hardDiskSize;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty("color")
-    private String color;
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  @JsonProperty("color")
+  private String color;
 }
