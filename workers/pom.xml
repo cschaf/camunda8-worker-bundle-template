@@ -3,45 +3,62 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>com.schaflabs</groupId>
         <artifactId>worker-bundle</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+
     <groupId>com.schaflabs.c8</groupId>
     <artifactId>workers</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <name>workers</name>
-    <description>workers</description>
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    <description>Camunda 8 Job Worker Implementierungen</description>
+
+    <!-- KEINE properties mehr - werden aus Parent geerbt -->
+
     <dependencies>
+        <!-- Internes Common-Modul -->
         <dependency>
             <groupId>com.schaflabs.c8</groupId>
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <!-- Spring Boot AOP für Workers -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+            <!-- Version aus Parent dependencyManagement -->
+        </dependency>
+
+        <!-- Spring Security (falls benötigt für Workers) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <!-- Version aus Parent dependencyManagement -->
+        </dependency>
+
+        <!-- Alle anderen Dependencies werden aus Parent oder common geerbt -->
     </dependencies>
+
     <build>
         <finalName>workers-${revision}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring.boot.version}</version>
+                <!-- Version aus Parent pluginManagement -->
                 <executions>
                     <execution>
                         <goals>
                             <goal>repackage</goal>
                         </goals>
                         <configuration>
-                            <mainClass>
-                                com.schaflabs.c8.workers.WorkersApplication.class
-                            </mainClass>
+                            <mainClass>com.schaflabs.c8.workers.WorkersApplication</mainClass>
                         </configuration>
                     </execution>
                 </executions>
